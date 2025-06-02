@@ -7,9 +7,6 @@ import time
 import json
 from util.llm_constants import PROMPT_TEMPLATE
 
-"""
-TO DO implement strategy and add another provider service
-"""
 
 class OllamaModelService(Provider):
     def __init__(self, model_reference, temperature, max_tokens, parser=Output):
@@ -25,7 +22,7 @@ class OllamaModelService(Provider):
             ollama_client = ChatOllama(model=self.model_reference,
                                        temperature=self.temperature,
                                        num_predict=self.max_tokens)
-            ollama_structured = ollama_client.with_structured_output(self.parser)
+            ollama_structured = ollama_client.with_structured_output(self.parser,include_raw=True)
             return ollama_structured
         except Exception as e:
           logger.info(f"Failed to initialize Ollama client: {e}") 
@@ -50,10 +47,11 @@ class OllamaModelService(Provider):
             ollama_client = self.load_model()
             chain = prompt | ollama_client
             response = chain.invoke({})
+            response.response_metadata
             end_time = time.time()
             response_time = end_time - start_time
             logger.info(f"LLM response time: {response_time} seconds")
-            return response.final_output
+            return response
         except Exception as e:
             logger.error(f"Error during LLM execution: {e}")
             return json.dumps({"error": str(e)})

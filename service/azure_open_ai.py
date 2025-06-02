@@ -1,21 +1,24 @@
 from langchain_openai import AzureChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from model.output_parser import Output
+from util.usage_statistics import extract_metadata
 from service.provider import Provider
-from util.llm_constants import PROMPT_TEMPLATE,AVAILABLE_MODELS
+from util.llm_constants import PROMPT_TEMPLATE,AZURE_MODELS
 from util.log_util import logger
 import time
 import json
 import os
+
+from langchain_core.output_parsers import PydanticOutputParser
 """
 TO DO use load config with .env file to get azure openai endpoint and api key
 """
 
 class AzureOpenAIModelService(Provider):
-    def __init__(self, temperature, max_tokens, parser=Output):
+    def __init__(self, temperature, max_tokens, parser = Output ):
         self.azure_openai_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"]
         self.azure_openai_api_key = os.environ["AZURE_OPENAI_API_KEY"]
-        self.model = AVAILABLE_MODELS.azure_gpt3_5.value
+        self.model = AZURE_MODELS.AZURE_GPT3_5.value
         self.api_version = "2024-12-01-preview"
         self.temperature = temperature
         self.max_tokens = max_tokens
@@ -36,7 +39,7 @@ class AzureOpenAIModelService(Provider):
                 max_tokens=self.max_tokens,
                 logprobs = True
                 )
-            return azure_client.with_structured_output(self.parser)
+            return azure_client.with_structured_output(self.parser, include_raw=True)
         except Exception as e:
             logger.info(f"Failed to initialize Azure OpenAI client: {e}")
             raise Exception
@@ -61,9 +64,9 @@ class AzureOpenAIModelService(Provider):
             chain = prompt | azure_client 
             response = chain.invoke({})
             end_time = time.time()
-            response_time = end_time - start_time
-            logger.info(f"LLM response time: {response_time} seconds")
-            return response.final_output
+            metadata = extract_metadata(response['raw'], start_time, end_time)
+            print(metadata)
+            return response["parsed"].final_output
         except Exception as e:
             logger.error(f"Error during LLM execution: {e}")
             return json.dumps({"error": str(e)})

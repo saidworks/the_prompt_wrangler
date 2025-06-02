@@ -52,6 +52,15 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
     ```bash
     ollama pull gemma3:12b
     ```
+## LLM Providers:
+
+-   **OLLAMA:** Supports models like `gemma3:12b`, `qwen3:latest`, and `granite3.3:latest`. 
+    best results were achieved using the `gemma3:12b` model based on multiple empirical testing with provided inputs.
+-   **AZURE:** Supports model `gpt-35-turbo` is the only model I tried and it achieves similar results to `gemma3:12b` model. 
+
+
+
+
 
 ## Usage
 
