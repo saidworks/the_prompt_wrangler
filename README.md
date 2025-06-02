@@ -1,11 +1,12 @@
 # Prompt Wrangler API
 
 [![License](https://img.shields.io/license/MIT/master)](https://github.com/your-username/prompt-wrangler/blob/master/LICENSE)
-[![Python Version](https://img.shields.io/badge/python-3.9+-informational)](https://www.python.org/)
+[![Python Version](https://img.shields.io/badge/python-3.11
++-informational)](https://www.python.org/)
 
 ## Overview
 
-The Prompt Wrangler API provides a secure and controlled interface for interacting with Language Models (LLMs). It focuses on input sanitization, parameter control, and observability to ensure responsible and reliable LLM usage. Built with FastAPI and Langchain, it prioritizes clean API design and robust error handling.
+The Prompt Wrangler API provides a secure and controlled interface for interacting with Language Models (LLMs). It focuses on input sanitization, parameter control, and observability to ensure responsible and reliable LLM usage. Built with Streamlit and Langchain, it prioritizes clean API design and robust error handling.
 
 ## Features
 
@@ -18,7 +19,7 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 
 ## Prerequisites
 
-*   **Python 3.9+**
+*   **Python 3.11+**
 *   **Ollama:** A framework to run language models locally.  [https://ollama.com/](https://ollama.com/)
 *   **An LLM Model:** You're using the default gemma3:12b. Can be changed in the code.
 
@@ -30,16 +31,23 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
     git clone https://github.com/your-username/prompt-wrangler.git
     cd prompt-wrangler
     ```
-
-2.  **Install dependencies:**
-
+2. **Setup virtual environment**
     ```bash
-    pip install -r requirements.txt
+    python -m venv venv
+    # Windows
+    venv\Scripts\activate
+    # MacOS
+    source venv/bin/activate
+    ```
+2.  **Install dependencies:**
+    To install dependencies you will need to install uv follow instruction on the following (link)[https://docs.astral.sh/uv/getting-started/installation/]
+    ```bash
+    uv sync
     ```
 
 3.  **Run Ollama and download the model:**
 
-    Ensure you have Ollama installed and running, and that the default model (gemma3:12b) is available. If not, pull the model:
+    Ensure you have Ollama installed and running, if not use the following (link)[https://ollama.com/] to install it.  Then ensure that the default model (gemma3:12b) is available. If not, pull the model:
 
     ```bash
     ollama pull gemma3:12b
