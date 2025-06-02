@@ -47,11 +47,11 @@ class OllamaModelService(Provider):
             ollama_client = self.load_model()
             chain = prompt | ollama_client
             response = chain.invoke({})
-            response.response_metadata
+            metadata = response.response_metadata
             end_time = time.time()
             response_time = end_time - start_time
             logger.info(f"LLM response time: {response_time} seconds")
-            return response
+            return response.final_output, metadata 
         except Exception as e:
             logger.error(f"Error during LLM execution: {e}")
             return json.dumps({"error": str(e)})
