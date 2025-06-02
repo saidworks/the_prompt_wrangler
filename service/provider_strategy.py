@@ -1,6 +1,6 @@
 from service.azure_open_ai import AzureOpenAIModelService
 from service.ollama import OllamaModelService
-from util.ollama_available_models import AVAILABLE_MODELS
+from util.llm_constants import AVAILABLE_MODELS
 
 # set a default model value
 DEFAULT_MODEL = AVAILABLE_MODELS.gemma3_12b.value 

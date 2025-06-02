@@ -5,6 +5,7 @@ from service.provider import Provider
 from util.log_util import logger
 import time
 import json
+from util.llm_constants import PROMPT_TEMPLATE
 
 """
 TO DO implement strategy and add another provider service
@@ -32,12 +33,9 @@ class OllamaModelService(Provider):
 
     def generate_prompt(self, input_text):
         """Generates the prompt for the language model."""
-        system_prompt = """You are a medical data extraction assistant, your job is to extract metadata about medical equipment
-                                from an unstructured user text input.."""
-
         prompt = ChatPromptTemplate.from_messages(
             [
-                ("system", system_prompt),
+                ("system",PROMPT_TEMPLATE.DEFAULT_SYSTEM_PROMPT.value),
                 ("human",input_text),
 
             ]

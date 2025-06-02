@@ -1,7 +1,7 @@
 import streamlit as st
 from service.azure_open_ai import AzureOpenAIModelService
 from service.ollama import OllamaModelService
-from util.ollama_available_models import AVAILABLE_MODELS
+from util.llm_constants import AVAILABLE_MODELS
 from service.provider_strategy import ProviderStrategy
 # set a default model value
 DEFAULT_MODEL = AVAILABLE_MODELS.gemma3_12b.value 
@@ -11,7 +11,7 @@ def main():
     st.set_page_config(page_title="Prompt Wrangler")
     st.title("Prompt Wrangler")
     #initialize model service
-    provider_strategy = ProviderStrategy("azure_open_ai")
+    provider_strategy = ProviderStrategy("ollama")
     # Define system and user prompts
     input_text = st.text_area("Input Text", "Patient requires a full face CPAP mask with humidifier due to AHI > 20. Ordered by Dr. Cameron.")
 

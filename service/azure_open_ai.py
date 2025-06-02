@@ -2,6 +2,7 @@ from langchain_openai import AzureChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from model.output_parser import Output
 from service.provider import Provider
+from util.llm_constants import PROMPT_TEMPLATE,AVAILABLE_MODELS
 from util.log_util import logger
 import time
 import json
@@ -14,7 +15,7 @@ class AzureOpenAIModelService(Provider):
     def __init__(self, temperature, max_tokens, parser=Output):
         self.azure_openai_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"]
         self.azure_openai_api_key = os.environ["AZURE_OPENAI_API_KEY"]
-        self.model = "gpt-35-turbo"
+        self.model = AVAILABLE_MODELS.azure_gpt3_5.value
         self.api_version = "2024-12-01-preview"
         self.temperature = temperature
         self.max_tokens = max_tokens
@@ -42,12 +43,9 @@ class AzureOpenAIModelService(Provider):
 
     def generate_prompt(self, input_text):
         """Generates the prompt for the language model."""
-        system_prompt = """You are a medical data extraction assistant, your job is to extract metadata about medical equipment
-                                from an unstructured user text input.."""
-
         prompt = ChatPromptTemplate.from_messages(
             [
-                ("system", system_prompt),
+                ("system", PROMPT_TEMPLATE.DEFAULT_SYSTEM_PROMPT.value),
                 ("user",input_text),
 
             ]
