@@ -69,10 +69,18 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
         streamlit run main.py    
     ```  
 
+
 ## Configuration
 
 *   **Model Name:**  The default model for ollama is `gemma3:12b` and for azure .  You can change this by modifying the `model_name` parameter in the `PromptWrangler` class constructor within the `main.py` file.
 *   **LLM Parameters:** The `temperature`, `max_tokens`, and `top_p` parameters are configured within the as part of dictionary and stored in streamlit session that create new instance of chat model each time the user submits a new request.  Adjust these values to fine-tune the LLM's output.
+## Testing
+1. ** Unit Test**
+ To run unit tests open terminal and execute:
+ ```bash
+ pytest
+ ```
+
 
 ## Future Enhancements
 
@@ -85,6 +93,7 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 *   **Secure Input Sanitization:**  Prevents injection attacks and malicious inputs by escaping special characters and removing unnecessary whitespace.
 *   **FastAPI Integration:** Provides a modern, performant API built on FastAPI.
 *   **Contributions:** Add details on how to contribute to this project.
+*   ** Testing Improvement:** Setup behave framework for more exhaustive testing
 
 
 
