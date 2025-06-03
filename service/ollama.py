@@ -10,10 +10,12 @@ from util.usage_statistics import extract_metadata
 
 
 class OllamaModelService(Provider):
-    def __init__(self, model_reference, temperature, max_tokens, parser=Output):
+    def __init__(self, model_reference, temperature, max_tokens, top_p, top_k, parser=Output):
         self.model_reference = model_reference
         self.temperature = temperature
         self.max_tokens = max_tokens
+        self.top_p = top_p
+        self.top_k = top_k
         self.parser = parser
 
     def load_model(self):
@@ -23,6 +25,9 @@ class OllamaModelService(Provider):
                 model=self.model_reference,
                 temperature=self.temperature,
                 num_predict=self.max_tokens,
+                top_k=self.top_k,
+                top_p=self.top_p,
+
             )
             ollama_structured = ollama_client.with_structured_output(
                 self.parser, include_raw=True

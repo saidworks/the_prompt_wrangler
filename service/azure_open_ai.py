@@ -11,24 +11,29 @@ import os
 from util.usage_statistics import extract_metadata
 
 
-"""
-TO DO use load config with .env file to get azure openai endpoint and api key
-"""
+
+
+
 
 
 class AzureOpenAIModelService(Provider):
-    def __init__(self, temperature, max_tokens, parser=Output):
+    def __init__(self, temperature, max_tokens, top_p, top_k, parser=Output):
         self.azure_openai_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"]
         self.azure_openai_api_key = os.environ["AZURE_OPENAI_API_KEY"]
         self.model = AZURE_MODELS.AZURE_GPT3_5.value
         self.api_version = "2024-12-01-preview"
         self.temperature = temperature
         self.max_tokens = max_tokens
+        self.top_p = top_p
+        self.top_k = top_k
         self.parser = parser
 
     def load_model(self):
         """Loads and initializes the Azure OpenAI Chat model."""
         try:
+            # we can add more parameters to control model
+            optional_params = {
+            }
             azure_client = AzureChatOpenAI(
                 azure_endpoint=self.azure_openai_endpoint,
                 openai_api_key=self.azure_openai_api_key,
@@ -38,6 +43,8 @@ class AzureOpenAIModelService(Provider):
                 temperature=self.temperature,
                 max_tokens=self.max_tokens,
                 logprobs=True,
+                top_p=self.top_p,
+                model_kwargs=optional_params
             )
             return azure_client.with_structured_output(self.parser, include_raw=True)
         except Exception as e:

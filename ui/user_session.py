@@ -18,9 +18,9 @@ def init_session_state() -> None:
         "total_tokens": 0,
         "total_duration": 0,
         "max_tokens": 512,
-        "seed": 4_503_599_627_370_496,
         "temperature": 0.5,
         "top_p": 0.9,
+        "top_k": 40,
     }
     for k, v in defaults.items():
         if k not in st.session_state:
@@ -77,6 +77,14 @@ def create_sidebar() -> None:
             step=0.01,
             help="Controls the diversity of the model's responses.",
         )
+        st.session_state.top_k = st.slider(
+            "Top K",
+            min_value=1,
+            max_value=100,
+            value=st.session_state.top_k,
+            step=1,
+            help="Controls the diversity of the model's responses.",
+        )
         st.session_state.max_tokens = st.slider(
             "Response Tokens",
             min_value=0,
@@ -99,7 +107,6 @@ def display_model_set_config() -> None:
     st.text(
         f"""Settings Recap:
             - model: {st.session_state.model}
-            - seed: {st.session_state.seed}
             - temperature: {st.session_state.temperature}
             - top_p: {st.session_state.top_p}
             - num_predict: {st.session_state.max_tokens}
@@ -135,7 +142,10 @@ def create_chatModel() -> Provider:
     create an instance of a provider based on session values"""
     return ProviderStrategy(
         st.session_state.provider,
+        st.session_state.top_p,
+        st.session_state.top_k,
         st.session_state.model,
         st.session_state.temperature,
         st.session_state.max_tokens,
+
     )
