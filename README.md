@@ -1,8 +1,6 @@
 # Prompt Wrangler API
 
-[![License](https://img.shields.io/license/MIT/master)](https://github.com/your-username/prompt-wrangler/blob/master/LICENSE)
-[![Python Version](https://img.shields.io/badge/python-3.11
-+-informational)](https://www.python.org/)
+[![Python Version](https://img.shields.io/badge/python-%3E=3.11-blue?logo=python)](https://www.python.org/)
 
 ## Overview
 
@@ -11,7 +9,10 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 ## Features
 
 
-*   **Controlled LLM Parameters:** Limits `temperature`, `max_tokens`, and `top_p` to ensure predictable and manageable outputs.
+*   **Controlled LLM Parameters:** 
+   *   Limits `temperature`, `max_tokens`, and `top_p` to ensure predictable and manageable outputs.
+   * Provider provide choice between available model providers, so far we support Azure OpenAI, and Ollama (ollama can be self-hosted, or locally run).
+
 *   **Observability:** Logs provide insights into critical errors, also we monitors token usage to help avoid overuse.
 *   **Langchain Powered:** Leverages Langchain for efficient LLM interaction.
 *   **Clear Error Handling:**  Provides detailed error messages for debugging.
@@ -59,14 +60,13 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 -   **AZURE:** Supports model `gpt-35-turbo` is the only model I tried and it achieves similar results to `gemma3:12b` model. 
 
 
-
-
-
 ## Usage
 
-1.  **Start the API:**
-
-   
+1.  **Start the app:**
+ Open terminal on the project folder and run the following command after you had setup ollama and other dependencies:
+    ```bash
+        streamlit run main.py    
+    ```  
 
 ## Configuration
 
