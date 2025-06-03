@@ -147,5 +147,4 @@ def create_chatModel() -> Provider:
         st.session_state.model,
         st.session_state.temperature,
         st.session_state.max_tokens,
-
     )

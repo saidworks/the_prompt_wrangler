@@ -5,12 +5,14 @@ from service.provider import Provider
 from util.log_util import logger
 import time
 import json
-from util.llm_constants import OLLAMA_MODELS, PROMPT_TEMPLATE
+from util.llm_constants import PROMPT_TEMPLATE
 from util.usage_statistics import extract_metadata
 
 
 class OllamaModelService(Provider):
-    def __init__(self, model_reference, temperature, max_tokens, top_p, top_k, parser=Output):
+    def __init__(
+        self, model_reference, temperature, max_tokens, top_p, top_k, parser=Output
+    ):
         self.model_reference = model_reference
         self.temperature = temperature
         self.max_tokens = max_tokens
@@ -27,7 +29,6 @@ class OllamaModelService(Provider):
                 num_predict=self.max_tokens,
                 top_k=self.top_k,
                 top_p=self.top_p,
-
             )
             ollama_structured = ollama_client.with_structured_output(
                 self.parser, include_raw=True

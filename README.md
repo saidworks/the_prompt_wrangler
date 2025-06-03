@@ -1,4 +1,4 @@
-# Prompt Wrangler API
+# The Prompt Wrangler Project
 
 [![Python Version](https://img.shields.io/badge/python-%3E=3.11-blue?logo=python)](https://www.python.org/)
 

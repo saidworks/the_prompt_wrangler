@@ -11,11 +11,6 @@ import os
 from util.usage_statistics import extract_metadata
 
 
-
-
-
-
-
 class AzureOpenAIModelService(Provider):
     def __init__(self, temperature, max_tokens, top_p, top_k, parser=Output):
         self.azure_openai_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"]
@@ -32,8 +27,7 @@ class AzureOpenAIModelService(Provider):
         """Loads and initializes the Azure OpenAI Chat model."""
         try:
             # we can add more parameters to control model
-            optional_params = {
-            }
+            optional_params = {}
             azure_client = AzureChatOpenAI(
                 azure_endpoint=self.azure_openai_endpoint,
                 openai_api_key=self.azure_openai_api_key,
@@ -44,7 +38,7 @@ class AzureOpenAIModelService(Provider):
                 max_tokens=self.max_tokens,
                 logprobs=True,
                 top_p=self.top_p,
-                model_kwargs=optional_params
+                model_kwargs=optional_params,
             )
             return azure_client.with_structured_output(self.parser, include_raw=True)
         except Exception as e:
