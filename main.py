@@ -3,6 +3,7 @@ from ui.user_session import (
     create_chatModel,
     create_sidebar,
     init_session_state,
+    update_sidebar_stats,
 )
 from util.llm_constants import OLLAMA_MODELS
 
@@ -16,7 +17,7 @@ def main():
     st.title("Prompt Wrangler")
     init_session_state()
     create_sidebar()
-    # initialize model service
+    # initialize model service using the strategy pattern
     provider_strategy = create_chatModel()
 
     # Define system and user prompts
@@ -29,8 +30,12 @@ def main():
         with st.spinner("Processing..."):
             result, metadata = provider_strategy.call_llm(input_text)
         try:
-            st.write("Result of the query is: ", result)
-            st.write("Usage statistics: ", metadata)
+            col1, col2 = st.columns(2)
+            with col1:
+                st.header("Output: ")
+                st.write(result)
+            with col2:
+                update_sidebar_stats(metadata)
         except Exception as e:
             st.error(f"An error occurred while displaying the results: {e}")
 

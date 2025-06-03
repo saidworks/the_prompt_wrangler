@@ -10,12 +10,12 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 
 ## Features
 
-*   **Secure Input Sanitization:**  Prevents injection attacks and malicious inputs by escaping special characters and removing unnecessary whitespace.
+
 *   **Controlled LLM Parameters:** Limits `temperature`, `max_tokens`, and `top_p` to ensure predictable and manageable outputs.
-*   **Observability:** Logs processing time to monitor performance.  (Token counting is a planned enhancement).
-*   **FastAPI Integration:** Provides a modern, performant API built on FastAPI.
+*   **Observability:** Logs provide insights into critical errors, also we monitors token usage to help avoid overuse.
 *   **Langchain Powered:** Leverages Langchain for efficient LLM interaction.
 *   **Clear Error Handling:**  Provides detailed error messages for debugging.
+*   **Token Counting:** Implement token counting to accurately measure API usage and costs.
 
 ## Prerequisites
 
@@ -66,81 +66,26 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 
 1.  **Start the API:**
 
-    ```bash
-    uvicorn main:app --reload
-    ```
-    (Replace `main` with the name of your Python file if it's different.)  The `--reload` flag enables automatic code reloading during development.
-
-2.  **Send a POST request to `/process_text/`:**
-
-    Use a tool like `curl`, `Postman`, or a Python `requests` script to send a JSON payload to the API endpoint.
-
-    **Example using `curl`:**
-
-    ```bash
-    curl -X POST \
-      http://localhost:8000/process_text/ \
-      -H 'Content-Type: application/json' \
-      -d '{"text": "Your input text here"}'
-    ```
-
-    **Example using Python `requests`:**
-
-    ```python
-    import requests
-    import json
-
-    url = "http://localhost:8000/process_text/"
-    headers = {'Content-Type': 'application/json'}
-    data = {'text': 'Your input text here'}
-
-    response = requests.post(url, headers=headers, data=json.dumps(data))
-
-    print(response.json())
-    ```
-
-## API Endpoint
-
-*   **`POST /process_text/`**: Processes the provided input text using the configured LLM.
-
-    *   **Request Body:**  JSON payload with a `text` field containing the input string.
-        ```json
-        {
-          "text": "Your input text here"
-        }
-        ```
-    *   **Response:** JSON payload containing the result of the LLM processing, or an error message.
-        *   **Success:**
-            ```json
-            {
-              "result": "The LLM's generated response",
-              "status": "success"
-            }
-            ```
-        *   **Error:**
-            ```json
-            {
-              "error": "Error message from the LLM or API",
-              "status": "failed"
-            }
-            ```
+   
 
 ## Configuration
 
 *   **Model Name:**  The default model is `gemma3:12b`.  You can change this by modifying the `model_name` parameter in the `PromptWrangler` class constructor within the `main.py` file.
-*   **LLM Parameters:** The `temperature`, `max_tokens`, and `top_p` parameters are configured within the `llm_params` dictionary.  Adjust these values to fine-tune the LLM's output.
+*   **LLM Parameters:** The `temperature`, `max_tokens`, and `top_p` parameters are configured within the as part of dictionary and stored in streamlit session that create new instance of chat model each time the user submits a new request.  Adjust these values to fine-tune the LLM's output.
 
 ## Future Enhancements
 
-*   **Token Counting:** Implement token counting to accurately measure API usage and costs.
 *   **Input Validation:** Add more robust input validation to prevent errors and enhance security.
 *   **Authentication:**  Add authentication to control API access.
 *   **Rate Limiting:**  Implement rate limiting to prevent abuse and ensure fair usage.
 *   **Asynchronous Processing:**  Use asynchronous processing to improve performance and scalability.
+*   **Logging:**  Improve logging to provide more detailed insights into API usage and performance.
+*   **Documentation:**  Expand documentation to include more examples  
+*   **Secure Input Sanitization:**  Prevents injection attacks and malicious inputs by escaping special characters and removing unnecessary whitespace.
+*   **FastAPI Integration:** Provides a modern, performant API built on FastAPI.
+*   **Contributions:** Add details on how to contribute to this project.
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/your-username/prompt-wrangler/blob/master/LICENSE) file for details.
 
 ## Contributing
 

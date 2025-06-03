@@ -29,8 +29,6 @@ class AzureOpenAIModelService(Provider):
     def load_model(self):
         """Loads and initializes the Azure OpenAI Chat model."""
         try:
-            print("Loading Azure OpenAI model...")
-            print(self.azure_openai_endpoint)
             azure_client = AzureChatOpenAI(
                 azure_endpoint=self.azure_openai_endpoint,
                 openai_api_key=self.azure_openai_api_key,

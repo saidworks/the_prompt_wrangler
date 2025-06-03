@@ -107,7 +107,7 @@ def display_model_set_config() -> None:
     )
 
 
-def update_sidebar_stats(response: Any) -> None:
+def update_sidebar_stats(metadata: Any) -> None:
     """
     Update the sidebar with statistics from the latest model response.
 
@@ -117,27 +117,17 @@ def update_sidebar_stats(response: Any) -> None:
     Args:
         response (Any): The response object from the chat model containing metadata.
     """
-    total_duration = response.response_metadata["total_duration"] / 1e9
+    total_duration = metadata["response_time"]
     st.session_state.total_duration = f"{total_duration:.2f} s"
-    st.session_state.input_tokens = response.usage_metadata["input_tokens"]
-    st.session_state.output_tokens = response.usage_metadata["output_tokens"]
-    st.session_state.total_tokens = response.usage_metadata["total_tokens"]
-    token_per_second = (
-        response.response_metadata["eval_count"]
-        / response.response_metadata["eval_duration"]
-    ) * 1e9
-    st.session_state.token_per_second = f"{token_per_second:.2f} tokens/s"
+    st.session_state.input_tokens = metadata["input_tokens"]
+    st.session_state.output_tokens = metadata["output_tokens"]
+    st.session_state.total_tokens = metadata["total_tokens"]
 
-    with st.sidebar:
-        st.text(
-            f"""
-            - input_tokens: {st.session_state.input_tokens}
-            - output_tokens: {st.session_state.output_tokens}
-            - total_tokens: {st.session_state.total_tokens}
-            - total_duration: {st.session_state.total_duration}
-            - token_per_second: {st.session_state.token_per_second}
-        """
-        )
+    st.header("Usage statistics:")
+    st.metric("input_tokens :", f"{st.session_state.input_tokens}")
+    st.metric("output_tokens :", f"{st.session_state.output_tokens}")
+    st.metric("total_tokens :", f"{st.session_state.total_tokens}")
+    st.metric("total_duration :", f"{st.session_state.total_duration}")
 
 
 def create_chatModel() -> Provider:
