@@ -71,3 +71,4 @@ target/
 
 #temp file
 tmp.json
+.env

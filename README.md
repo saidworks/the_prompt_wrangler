@@ -58,6 +58,7 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 -   **OLLAMA:** Supports models like `gemma3:12b`, `qwen3:latest`, and `granite3.3:latest`. 
     best results were achieved using the `gemma3:12b` model based on multiple empirical testing with provided inputs.
 -   **AZURE:** Supports model `gpt-35-turbo` is the only model I tried and it achieves similar results to `gemma3:12b` model. 
+    To use azure you will need to modify name of `.env.example` file to `.env` and set your own resource url and api key.
 
 
 ## Usage
