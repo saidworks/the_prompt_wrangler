@@ -104,7 +104,7 @@ ruff check
 *   **Secure Input Sanitization:**  Prevents injection attacks and malicious inputs by escaping special characters and removing unnecessary whitespace.
 *   **FastAPI Integration:** Provides a modern, performant API built on FastAPI.
 *   **Contributions:** Add details on how to contribute to this project.
-*   ** Testing Improvement:** Setup behave framework for more exhaustive testing
+*   **Testing Improvement:** Setup behave framework for more exhaustive testing
 
 
 
