@@ -6,15 +6,16 @@ from util.llm_constants import PROMPT_TEMPLATE, AZURE_MODELS
 from util.log_util import logger
 import time
 import json
-import os
-
+from dotenv import dotenv_values
 from util.usage_statistics import extract_metadata
+
+config = dotenv_values(".env")
 
 
 class AzureOpenAIModelService(Provider):
     def __init__(self, temperature, max_tokens, top_p, top_k, parser=Output):
-        self.azure_openai_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"]
-        self.azure_openai_api_key = os.environ["AZURE_OPENAI_API_KEY"]
+        self.azure_openai_endpoint = config.get("AZURE_OPENAI_ENDPOINT")
+        self.azure_openai_api_key = config.get("AZURE_OPENAI_API_KEY")
         self.model = AZURE_MODELS.AZURE_GPT3_5.value
         self.api_version = "2024-12-01-preview"
         self.temperature = temperature
