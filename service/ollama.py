@@ -51,16 +51,11 @@ class OllamaModelService(Provider):
     def call_llm(self, input_text):
         """Calls the language model to generate a response."""
         try:
-            start_time = time.time()
             prompt = self.generate_prompt(input_text)
             ollama_client = self.load_model()
             chain = prompt | ollama_client
             response = chain.invoke({})
-            end_time = time.time()
-            response_time = end_time - start_time
             metadata = extract_metadata(response["raw"])
-            logger.info(f"response looks like {response}")
-            logger.info(f"LLM response time: {response_time} seconds")
             return response["parsed"].final_output, metadata
         except Exception as e:
             logger.error(f"Error during LLM execution: {e}")

@@ -201,4 +201,3 @@ class TestPromptWranglerApp:
 
         # Verify LLM was called with empty string
         mock_provider.call_llm.assert_called_once_with("")
-
