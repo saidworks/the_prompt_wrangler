@@ -40,15 +40,15 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
     # MacOS
     source venv/bin/activate
     ```
-2.  **Install dependencies:**
-    To install dependencies you will need to install uv follow instruction on the following (link)[https://docs.astral.sh/uv/getting-started/installation/]
+3.  **Install dependencies:**
+    To install dependencies you will need to install uv follow instruction on the following [link](https://docs.astral.sh/uv/getting-started/installation/), then open terminal in project folder and execute:
     ```bash
     uv sync
     ```
 
-3.  **Run Ollama and download the model:**
+4.  **Run Ollama and download the model:**
 
-    Ensure you have Ollama installed and running, if not use the following (link)[https://ollama.com/] to install it.  Then ensure that the default model (gemma3:12b) is available. If not, pull the model:
+    Ensure you have Ollama installed and running, if not use the following [link](https://ollama.com/) to install it.  Then ensure that the default model (gemma3:12b) is available. If not, pull the model:
 
     ```bash
     ollama pull gemma3:12b
@@ -70,7 +70,7 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 
 ## Configuration
 
-*   **Model Name:**  The default model is `gemma3:12b`.  You can change this by modifying the `model_name` parameter in the `PromptWrangler` class constructor within the `main.py` file.
+*   **Model Name:**  The default model for ollama is `gemma3:12b` and for azure .  You can change this by modifying the `model_name` parameter in the `PromptWrangler` class constructor within the `main.py` file.
 *   **LLM Parameters:** The `temperature`, `max_tokens`, and `top_p` parameters are configured within the as part of dictionary and stored in streamlit session that create new instance of chat model each time the user submits a new request.  Adjust these values to fine-tune the LLM's output.
 
 ## Future Enhancements
