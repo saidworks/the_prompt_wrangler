@@ -2,7 +2,7 @@
 name = "the-prompt-wrangler"
 version = "0.1.0"
 description = """`The Prompt Wrangler` application is a sophisticated tool designed to interface with the large 
-language model via OpenAI API specifically using ollama, enabling medical data extraction tasks. 
+language model different providers like azure openai and ollama, enabling medical data extraction tasks. 
 This version includes enhanced documentation, comprehensive unit tests, and improved code structure for better
  maintainability and user experience."""
 readme = "README.md"
