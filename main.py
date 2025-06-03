@@ -1,27 +1,44 @@
 import streamlit as st
-from service.azure_open_ai import AzureOpenAIModelService
-from service.ollama import OllamaModelService
-from util.llm_constants import AVAILABLE_MODELS
-from service.provider_strategy import ProviderStrategy
+from ui.user_session import (
+    create_chatModel,
+    create_sidebar,
+    init_session_state,
+    update_sidebar_stats,
+)
+from util.llm_constants import OLLAMA_MODELS
+
 # set a default model value
-DEFAULT_MODEL = AVAILABLE_MODELS.gemma3_12b.value 
+DEFAULT_MODEL = OLLAMA_MODELS.GEMMA3_12B.value
+
 
 # Streamlit UI
 def main():
     st.set_page_config(page_title="Prompt Wrangler")
     st.title("Prompt Wrangler")
-    #initialize model service
-    provider_strategy = ProviderStrategy("ollama")
+    init_session_state()
+    create_sidebar()
+    # initialize model service using the strategy pattern
+    provider_strategy = create_chatModel()
+
     # Define system and user prompts
-    input_text = st.text_area("Input Text", "Patient requires a full face CPAP mask with humidifier due to AHI > 20. Ordered by Dr. Cameron.")
+    input_text = st.text_area(
+        "Input Text",
+        "Patient requires a full face CPAP mask with humidifier due to AHI > 20. Ordered by Dr. Cameron.",
+    )
 
     if st.button("Run"):
         with st.spinner("Processing..."):
-            result = provider_strategy.call_llm(input_text)
+            result, metadata = provider_strategy.call_llm(input_text)
         try:
-            st.write(result)
+            col1, col2 = st.columns(2)
+            with col1:
+                st.header("Output: ")
+                st.write(result)
+            with col2:
+                update_sidebar_stats(metadata)
         except Exception as e:
             st.error(f"An error occurred while displaying the results: {e}")
+
 
 if __name__ == "__main__":
     main()
