@@ -23,6 +23,7 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 *   **Python 3.11+**
 *   **Ollama:** A framework to run language models locally.  [https://ollama.com/](https://ollama.com/)
 *   **An LLM Model:** You're using the default gemma3:12b. Can be changed in the code.
+*   **Azure Open AI Resource:** You will need to have a model deployed in Azure AI Foundry and a corresponding Endpoint, API key.
 
 ## Installation
 
