@@ -75,11 +75,22 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 *   **Model Name:**  The default model for ollama is `gemma3:12b` and for azure .  You can change this by modifying the `model_name` parameter in the `PromptWrangler` class constructor within the `main.py` file.
 *   **LLM Parameters:** The `temperature`, `max_tokens`, and `top_p` parameters are configured within the as part of dictionary and stored in streamlit session that create new instance of chat model each time the user submits a new request.  Adjust these values to fine-tune the LLM's output.
 ## Testing
-1. **Unit Test**
+1. **Unit Test:**
  To run unit tests open terminal and execute:
  ```bash
  pytest
  ```
+
+## Linter 
+The project uses ruff for code formatting and as a linter, for automatic formatting after changes execute:
+```bash
+ruff format
+```
+To check for violation based on the rules set in `ruff.toml`:
+```bash
+ruff check
+```
+
 
 
 ## Future Enhancements
