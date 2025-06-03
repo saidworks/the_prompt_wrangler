@@ -89,4 +89,4 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 
 ## Contributing
 
-Contributions are welcome! Please see the [CONTRIBUTING.md](https://github.com/saidworks/prompt-wrangler/blob/main/CONTRIBUTING.md) file for details on how to contribute.
+Contributions are welcome! Please see the [CONTRIBUTING.md](https://github.com/saidworks/the_prompt_wrangler/blob/main/CONTRIBUTING.md) file for details on how to contribute.
