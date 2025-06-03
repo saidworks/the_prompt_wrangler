@@ -4,17 +4,16 @@ import sys
 
 # Configure the root logger
 logger = logging.getLogger(__name__)  # Get a logger for the current module
-logger.setLevel(logging.INFO) # Set default log level
+logger.setLevel(logging.INFO)  # Set default log level
 
 # Configure a stream handler to output to the console
 console_handler = logging.StreamHandler(stream=sys.stdout)  # Ensures output to console
 console_handler.setLevel(logging.INFO)  # Set level for console output
 formatter = JsonFormatter(
-    defaults={"environment": "dev", "module": __name__} # include module name
+    defaults={"environment": "dev", "module": __name__}  # include module name
 )
 console_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
-
 
 
 def get_logger(name, level=logging.INFO):
@@ -32,6 +31,7 @@ def get_logger(name, level=logging.INFO):
     logger.setLevel(level)
     logger.addHandler(console_handler)  # Reuse the existing console handler
     return logger
+
 
 # Example usage (within a class or module):
 # class MyClass:

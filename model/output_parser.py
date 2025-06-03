@@ -5,8 +5,12 @@ from model.dme_models import *
 
 class Output(BaseModel):
     """Output model to structures llm response"""
-    final_output : Union[CPAPSuppliesOrder, CPAPMaskOrder, HospitalBedOrder, WheelchairOrder, NebulizerOrder, OxygenConcentratorOrder]
 
-
-
-
+    final_output: Union[
+        CPAPSuppliesOrder,
+        CPAPMaskOrder,
+        HospitalBedOrder,
+        WheelchairOrder,
+        NebulizerOrder,
+        OxygenConcentratorOrder,
+    ]
