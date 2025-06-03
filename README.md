@@ -27,9 +27,9 @@ The Prompt Wrangler API provides a secure and controlled interface for interacti
 ## Installation
 
 1.  **Clone the repository:**
-
+    Open your terminal and type:
     ```bash
-    git clone https://github.com/your-username/prompt-wrangler.git
+    git clone git@github.com:saidworks/the_prompt_wrangler.git
     cd prompt-wrangler
     ```
 2. **Setup virtual environment**
